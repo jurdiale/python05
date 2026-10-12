@@ -177,6 +177,7 @@ if __name__ == '__main__':
     datas.output_pipeline(3, csv1)
     print()
     datas.print_processors_stats()
+    print()
     batch = [21, ['I love AI', 'LLMs are wonderful', 'Stay healthy'],
              [{'log_level': 'ERROR', 'log_message': '500 server crash'},
               {'log_level': 'NOTICE',
@@ -186,6 +187,7 @@ if __name__ == '__main__':
     print()
     datas.process_stream(batch)
     datas.print_processors_stats()
+    print()
     print("Send 5 processed data from each processor to a JSON plugin:")
     datas.output_pipeline(5, json1)
     print()
