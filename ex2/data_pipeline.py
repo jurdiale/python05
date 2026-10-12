@@ -172,9 +172,9 @@ if __name__ == '__main__':
     datas.print_processors_stats()
     print()
     print("Send 3 processed data from each processor to a CSV plugin:")
-    csv = PluginCSV
-    json = PluginJSON
-    datas.output_pipeline(3, csv())
+    csv1 = PluginCSV()
+    json1 = PluginJSON()
+    datas.output_pipeline(3, csv1)
     print()
     datas.print_processors_stats()
     batch = [21, ['I love AI', 'LLMs are wonderful', 'Stay healthy'],
@@ -187,6 +187,6 @@ if __name__ == '__main__':
     datas.process_stream(batch)
     datas.print_processors_stats()
     print("Send 5 processed data from each processor to a JSON plugin:")
-    datas.output_pipeline(5, json())
+    datas.output_pipeline(5, json1)
     print()
     datas.print_processors_stats()
