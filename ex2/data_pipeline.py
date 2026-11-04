@@ -33,14 +33,14 @@ class ExportPlugin(typing.Protocol):
 class PluginCSV:
     def process_output(self, data: list[tuple[int, str]]) -> None:
         printed = [v for k, v in data]
-        print("CSV Output: ")
+        print("CSV Output:")
         print(f"{','.join(printed)}")
 
 
 class PluginJSON:
     def process_output(self, data: list[tuple[int, str]]) -> None:
         pairs = [f'"item_{k}": "{v}"' for k, v in data]
-        print("JSON Output: ")
+        print("JSON Output:")
         print(f"{'{' + ', '.join(pairs) + '}'}")
 
 
@@ -93,7 +93,7 @@ class NumericProcessor(DataProcessor):
             or (isinstance(data, list)
                 and all(isinstance(x, (int, float)) for x in data)))
 
-    def ingest(self, data: typing.Any) -> None:
+    def ingest(self, data: int | float | list[int | float]) -> None:
         numbers = data if isinstance(data, list) else [data]
         if not self.validate(data):
             raise ValueError("Improper numeric data")
@@ -111,7 +111,7 @@ class TextProcessor(DataProcessor):
             or (isinstance(data, list)
                 and all(isinstance(x, (str)) for x in data)))
 
-    def ingest(self, data: typing.Any) -> None:
+    def ingest(self, data: str | list[str]) -> None:
         strings = data if isinstance(data, list) else [data]
         if not self.validate(data):
             raise ValueError("Improper text data")
@@ -137,7 +137,7 @@ class LogProcessor(DataProcessor):
                     for element in data))
         return False
 
-    def ingest(self, data: typing.Any) -> None:
+    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         strings = data if isinstance(data, list) else [data]
         if not self.validate(data):
             raise ValueError("Improper log data")

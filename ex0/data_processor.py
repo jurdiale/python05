@@ -30,7 +30,7 @@ class NumericProcessor(DataProcessor):
             or (isinstance(data, list)
                 and all(isinstance(x, (int, float)) for x in data)))
 
-    def ingest(self, data: typing.Any) -> None:
+    def ingest(self, data: int | float | list[int | float]) -> None:
         numbers = data if isinstance(data, list) else [data]
         if not self.validate(data):
             raise ValueError("Improper numeric data")
@@ -46,7 +46,7 @@ class TextProcessor(DataProcessor):
             or (isinstance(data, list)
                 and all(isinstance(x, (str)) for x in data)))
 
-    def ingest(self, data: typing.Any) -> None:
+    def ingest(self, data: str | list[str]) -> None:
         strings = data if isinstance(data, list) else [data]
         if not self.validate(data):
             raise ValueError("Improper text data")
@@ -70,7 +70,7 @@ class LogProcessor(DataProcessor):
                     for element in data))
         return False
 
-    def ingest(self, data: typing.Any) -> None:
+    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         strings = data if isinstance(data, list) else [data]
         if not self.validate(data):
             raise ValueError("Improper log data")
@@ -93,7 +93,7 @@ if __name__ == '__main__':
         numbers.ingest("foo")
     except ValueError as e:
         print(f" Got exception: {e}")
-    array = [1, 2, 3, 4, 5]
+    array: list[int | float] = [1, 2, 3, 4, 5]
     numbers.ingest(array)
     print(f" Processing data: {array}")
     print(" Extracting 3 values...")
